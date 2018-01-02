@@ -1,9 +1,13 @@
 #ifndef LEVELS_INITIAL_H
 #define LEVELS_INITIAL_H
 
+using namespace std;
+
 #include <GL/glut.h>
+#include "object.h"
 #include <iostream>
 #include <cmath>
+#include <string>
 
 GLint window_width, window_height;
 GLfloat total_width = 8;
@@ -13,25 +17,23 @@ GLfloat add_panel_height = total_height / 8.0;
 GLfloat add_panel_start = total_width - add_panel_width;
 bool selector = false;
 GLint selector_id = -1;
+string matrix[31][25];
 
 void draw_screen_table();                                                        /* Narandzasta mreza i plava pozadina */
 void draw_selector_rect();                                                       /* Prilikom selektovanja menja boju */
 void set_scene();
+void prepare_matrix();
 
 void on_display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     set_scene();
+// DEBUG HERE
+
+// DEBUG HERE
     draw_selector_rect();
     draw_screen_table();
-    glutSwapBuffers();
-}
 
-void on_keyboard(unsigned char key, int x, int y) {
-    switch (key) {
-    case 27:
-        exit(0);
-        break;
-    }
+    glutSwapBuffers();
 }
 
 void on_reshape(GLint width, GLint height) {
@@ -98,7 +100,6 @@ void on_mousle_left_click(int button, int state, int x1, int y1) {
     y1 = 600-y1;
     float x = (x1-40)/115.0;
     float y = (y1-10)/115.0;
-
     if((x >= 6) && (x <= 8) && (y >= 0) && (y <= 5)) {
         // Kliknuto je u deo za dodavanje elemenata
         if (selector == false) {
@@ -132,4 +133,9 @@ void draw_selector_rect() {
     }
 }
 
+void prepare_matrix(){
+    for(int i = 0; i < 31; i++)
+        for(int j = 0; j < 25; j++)
+            matrix[i][j] = "";
+}
 #endif // LEVELS_INITIAL_H

@@ -5,9 +5,13 @@ CONFIG -= qt
 LIBS += -lGL -lGLU -lglut -lm
 
 SOURCES += \
-    levels.cpp
+    levels.cpp \
+    object.cpp
 
 HEADERS += \
-    levels_draw.h
+    levels_draw.h \
+    object.h \
+    levels_animate.h \
+    levels_execute.h
 
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
