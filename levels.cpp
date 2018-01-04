@@ -1,6 +1,11 @@
 #include <GL/glut.h>
+#include <string>
+#include <vector>
 #include "levels_draw.h"
 #include "levels_animate.h"
+#include "levels_global.h"
+
+using namespace std;
 
 extern void on_display();
 extern void on_keyboard(unsigned char key, int x, int y);
@@ -8,8 +13,7 @@ extern void on_reshape(GLint width, GLint height);
 extern void on_mousle_left_click(int button, int state,int x1, int y1);
 extern void on_timer(int value);
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -24,6 +28,7 @@ int main(int argc, char **argv)
 
     glColor3f(0,0,0);
     glEnable(GL_DEPTH_TEST);
+
 
     glutMainLoop();
 

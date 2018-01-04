@@ -1,0 +1,5 @@
+TIP OBJEKTA  --- SIZE WIDTH  ---  SIZE_HEIGH  --- POSITION X  --- POSITION Y  ---  CONNECTABLE
+
+dynLopta_1_1_1_1_t
+dynLopta_1_1_3_3_t
+dynLopta_1_1_5_5_t

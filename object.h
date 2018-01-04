@@ -8,30 +8,32 @@ using namespace std;
 
 class Object
 {
-    /* Klasa Object je osnovna klasa za svaki element koji mozemo da dodamo. Svaki element mora da ima:
-     *
-     *          Poziciju        - zadatu sa X i Y
-     *          Velicinu        - zadatu sa width i height
-     *          Tip             - zadat sa type radi identifikacije objekta prilikom crtanja
-     *          Povezivost      - true ako jeste, false ako nije
-     *          is_connectable()   - true ako se moze povezati, false ako ne moze
-     *          draw_object()   - svaki objekat se mora iscrtati. Apstraktno jer zavisi od tipa
-     */
 protected:
-    float size_width;
-    float size_height;
-    float position_x;
-    float position_y;
-    bool connectable;
-    string type;
+    float _size_width;
+    float _size_height;
+    float _position_x;
+    float _position_y;
+    bool _connectable;
+    string _type;
 public:
-    Object(float sw, float sh, float px, float py, bool c, string typ)
-        :size_width(sw), size_height(sh), position_x(px), position_y(py), connectable(c), type(typ)
+    Object(float size_width, float size_height, float position_x, float position_y, bool connectable, string type)
+        :_size_width(size_width), _size_height(size_height), _position_x(position_x), _position_y(position_y),
+         _connectable(connectable), _type(type)
         {}
-    virtual void draw_object() = 0;
-    bool is_connectable() {
-        return connectable;
-    }
+
+    virtual void draw_object() = 0;  
+    bool is_connectable()                           { return _connectable; }
+
+    void set_size_width(float width)                { _size_width = width; }
+    void set_size_height(float height)              { _size_height = height; }
+    void set_position_x(float x)                    { _position_x = x; }
+    void set_position_y(float y)                    { _position_y = y; }
+
+    float get_x()                                   { return _position_x; }
+    float get_y()                                   { return _position_y; }
+    float get_height()                              { return _size_height; }
+    float get_weight()                              { return _size_width; }
+    string get_type()                               { return _type; }
 };
 
 /*******************************************************************************************************************/
@@ -43,8 +45,8 @@ class Static : public Object
      * Povezivost je inicijalno postavljena na false, jer ne mogu ni da se povezuju
      */
 public:
-    Static(float sw, float sh, float px, float py, string typ)
-        :Object(sw,sh,px,py,false,typ)
+    Static(float size_width, float size_height, float position_x, float position_y, string type)
+        :Object(size_width, size_height, position_x, position_y, false, type)
         {}
     void draw_object();
 };
@@ -57,13 +59,16 @@ class Dynamic : public Object
      * move_x i move_y koji ce im u svakom ponovnom iscrtavanju slike reci gde se nalaze
      */
 public:
-    Dynamic(float sw, float sh, float px, float py, float mvx, float mvy, bool c, string typ)
-        :Object(sw,sh,px,py,c,typ), move_x(mvx), move_y(mvy)
+    Dynamic(float size_width, float size_height, float position_x, float position_y, float move_x, float move_y, bool connectable, string type)
+        :Object(size_width, size_height, position_x, position_y, connectable, type), _move_x(move_x), _move_y(move_y)
         {}
     void draw_object();
-protected:
-    float move_x;
-    float move_y;
+    void set_move_x(float x)                    { _move_x = x; }
+    void set_move_y(float y)                    { _move_y = y; }
+
+private:
+    float _move_x;
+    float _move_y;
 };
 
 /********************************************************************************************************************/
@@ -76,12 +81,13 @@ class Static_Interactable : public Object
      * (motor upaljen, zupcanik se okrece itd) ili ne
      */
 public:
-    Static_Interactable(float sw, float sh, float px, float py, bool c, bool act, string typ)
-        :Object(sw,sh,px,py,c,typ), activated(act)
+    Static_Interactable(float size_width, float size_height, float position_x, float position_y, bool connectable, string type, bool activated)
+        :Object(size_width, size_height, position_x, position_y, connectable, type), _activated(activated)
         {}
     void draw_object();
+
 protected:
-    bool activated;
+    bool _activated;
 };
 
 /*********************************************************************************************************************/

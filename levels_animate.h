@@ -6,7 +6,7 @@
 int animation_ongoing = 0;
 void on_timer(int value);
 
-void on_keyboard(unsigned char key, int x, int y) {
+void on_keyboard(unsigned char key, int x, int y) {/*
     switch (key) {
     case 27:
         exit(0);
@@ -22,7 +22,7 @@ void on_keyboard(unsigned char key, int x, int y) {
     case 'p':
         animation_ongoing = 0;
         break;
-    }
+    }*/
 }
 
 void on_timer(int value)
